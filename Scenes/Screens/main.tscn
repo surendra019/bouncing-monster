@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmg2oyiktpau1"]
+
+[ext_resource type="Script" path="res://Scripts/Screens/main.gd" id="1_aqhxk"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_aqhxk")
+
+[node name="RotatorSpawn" type="Marker2D" parent="."]
+position = Vector2(252, 0)
+
+[node name="RotatorStart" type="Marker2D" parent="."]
+position = Vector2(131, 632)
+
+[node name="RotatorContainer" type="Node2D" parent="."]

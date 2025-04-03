@@ -14,6 +14,10 @@ config/name="Bouncing Monster"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Manager="*res://Scripts/Autoload/manager.gd"
+
 [display]
 
 window/size/viewport_width=504
