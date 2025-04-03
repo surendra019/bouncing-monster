@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://detotgjuxo3t0"
+path="res://.godot/imported/PTModelFont_ID2.fnt-deeb839c71a82fbafb16666fed9c8141.fontdata"
+
+[deps]
+
+source_file="res://Assets/fonts/PTModelFont_ID2.fnt"
+dest_files=["res://.godot/imported/PTModelFont_ID2.fnt-deeb839c71a82fbafb16666fed9c8141.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

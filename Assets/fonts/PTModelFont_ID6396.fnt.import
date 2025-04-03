@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://cwxlmpgs2y7oq"
+path="res://.godot/imported/PTModelFont_ID6396.fnt-6b35d610e31137638fba6ff50a248f65.fontdata"
+
+[deps]
+
+source_file="res://Assets/fonts/PTModelFont_ID6396.fnt"
+dest_files=["res://.godot/imported/PTModelFont_ID6396.fnt-6b35d610e31137638fba6ff50a248f65.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2
