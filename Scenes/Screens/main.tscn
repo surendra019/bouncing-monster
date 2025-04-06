@@ -1,14 +1,176 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmg2oyiktpau1"]
+[gd_scene load_steps=4 format=3 uid="uid://bmg2oyiktpau1"]
 
 [ext_resource type="Script" path="res://Scripts/Screens/main.gd" id="1_aqhxk"]
+[ext_resource type="Script" path="res://Scripts/UI/main_ui.gd" id="2_ydvd3"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4yy1"]
+bg_color = Color(0.370364, 0.370365, 0.370364, 1)
+
+[node name="Main" type="Control" groups=["main"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_aqhxk")
+rotator_spawn_gap = 438.0
 
 [node name="RotatorSpawn" type="Marker2D" parent="."]
 position = Vector2(252, 0)
 
 [node name="RotatorStart" type="Marker2D" parent="."]
-position = Vector2(131, 632)
+position = Vector2(151, 730)
 
 [node name="RotatorContainer" type="Node2D" parent="."]
+
+[node name="PlatformContainer" type="Node2D" parent="."]
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(252, 651)
+
+[node name="RotatorSpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="BoxSpawnRightX" type="Marker2D" parent="."]
+position = Vector2(703, 631)
+metadata/_edit_group_ = true
+
+[node name="BoxSpawnLeftX" type="Marker2D" parent="."]
+position = Vector2(-199, 633)
+metadata/_edit_group_ = true
+
+[node name="BoxContainer" type="Node2D" parent="."]
+
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="BG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource("2_ydvd3")
+
+[node name="Input" type="Control" parent="UI" groups=["input"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI"]
+offset_right = 89.0
+offset_bottom = 35.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_q4yy1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseButton" type="Button" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -90.0
+offset_top = 22.0
+offset_right = -24.0
+offset_bottom = 58.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "Pause"
+
+[node name="PauseMenu" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.47451)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.5
+offset_top = -31.5
+offset_right = 81.5
+offset_bottom = 31.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="UI/PauseMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="UI/PauseMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Restart"
+
+[node name="GameOverMenu" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/GameOverMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.47451)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOverMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.5
+offset_top = -25.0
+offset_right = 47.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HomeButton" type="Button" parent="UI/GameOverMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Home"
+
+[node name="RetryButton" type="Button" parent="UI/GameOverMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Retry"
+
+[connection signal="timeout" from="RotatorSpawnTimer" to="." method="_on_rotator_spawn_timer_timeout"]
+[connection signal="pressed" from="UI/PauseButton" to="UI" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/ResumeButton" to="UI" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/RestartButton" to="UI" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/GameOverMenu/VBoxContainer/HomeButton" to="UI" method="_on_home_button_pressed"]
+[connection signal="pressed" from="UI/GameOverMenu/VBoxContainer/RetryButton" to="UI" method="_on_retry_button_pressed"]

@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://cvjhj8vh8pnwu"]
+[gd_scene load_steps=3 format=3 uid="uid://cvjhj8vh8pnwu"]
+
+[ext_resource type="Script" path="res://Scripts/Screens/menu.gd" id="1_gkxxh"]
+[ext_resource type="Texture2D" uid="uid://s8j10wqhja54" path="res://Assets/GUI/SVG/Buttons/button_medium_normal.svg" id="2_hrbl8"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -7,3 +10,34 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gkxxh")
+
+[node name="PlayButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.5
+offset_top = -57.0
+offset_right = 97.5
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_hrbl8")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="PlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Play"
+horizontal_alignment = 1
+vertical_alignment = 1

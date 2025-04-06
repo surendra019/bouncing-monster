@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtsff08rfh3ew"]
+
+[ext_resource type="Script" path="res://Scripts/rotator.gd" id="1_2bhma"]
+[ext_resource type="Texture2D" uid="uid://dksdwifxxvo6e" path="res://Assets/Individual/Rotators/10.png" id="2_btj52"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8x3fq"]
+radius = 106.367
+
+[node name="Rotator1" type="StaticBody2D" groups=["rotator"]]
+script = ExtResource("1_2bhma")
+speed = 5
+
+[node name="10" type="Sprite2D" parent="."]
+position = Vector2(0, 3)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_btj52")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 3)
+scale = Vector2(0.7, 0.7)
+polygon = PackedVector2Array(-69.5, -198.5, -69.5, -195.8, -90.8, -186.5, -93.1, -186.5, -115.2, -171.5, -117.3, -171.5, -130.4, -159.5, -132.4, -159.5, -160.4, -128.5, -161.6, -128.5, -179.6, -98.5, -180.9, -98.5, -189.9, -75.5, -191.1, -75.5, -197, -51.5, -198.3, -51.5, -201.3, -26.5, -202.5, -26.5, -202.5, 15.7, -199.5, 29.9, -199.5, 35.8, -186.5, 73.8, -186.5, 77, -174.5, 97.9, -174.5, 100.2, -149.5, 131.3, -149.5, 133.4, -124.5, 155.3, -124.5, 156.6, -85.5, 179.6, -85.5, 180.9, -70.5, 185.9, -70.5, 188.5, -63, 185.5, -60.5, 185.5, -60.5, 147.3, -85, 133.5, -86.7, 133.5, -102.8, 120.5, -104.6, 120.5, -130.6, 91.5, -131.3, 91.5, -151.3, 52.5, -152, 52.5, -157.9, 28.5, -158.7, 28.5, -160.7, 8.5, -161.4, 8.5, -159.5, -28.4, -159.5, -34.2, -147.5, -70.2, -147.5, -73, -131.5, -98.9, -131.5, -100.7, -107.5, -126.7, -107.5, -127.4, -62.9, -156.5, -60.5, -156.5, -60.5, -194.9)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 3)
+scale = Vector2(0.7, 0.7)
+polygon = PackedVector2Array(65.5, -198.5, 65.5, -195.8, 63.5, -194.7, 63.5, -157.4, 99.9, -134.5, 101.7, -134.5, 131.7, -103.5, 132.4, -103.5, 145.4, -81.5, 146.1, -81.5, 154.1, -61.5, 154.8, -61.5, 164.5, -17.1, 164.5, 8.10001, 161.5, 24.3, 161.5, 29.2, 153.5, 53.2, 153.5, 56, 132.5, 92, 132.5, 93.7, 102.5, 123.7, 102.5, 124.3, 63.5, 147.4, 63.5, 184.3, 66.7, 187.5, 72.1, 187.5, 77, 184.5, 80, 184.5, 113, 165.5, 115.3, 165.5, 141.2, 142.5, 143.4, 142.5, 161.4, 121.5, 162.6, 121.5, 180.6, 92.5, 181.8, 92.5, 192.9, 65.5, 194.1, 65.5, 200, 41.5, 201.3, 41.5, 204.3, 15.5, 205.5, 15.5, 205.5, -22.7, 201.5, -43.9, 201.5, -48.8, 189.5, -83, 189.5, -86, 174.5, -112, 174.5, -114.2, 155.5, -137.2, 155.5, -139.4, 125.5, -166.4, 125.5, -167.6, 104.5, -180.7, 104.5, -181.8)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_8x3fq")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

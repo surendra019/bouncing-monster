@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c16cepkdricsp"]
+
+[ext_resource type="Script" path="res://Scripts/rotator.gd" id="1_snckd"]
+[ext_resource type="Texture2D" uid="uid://cw0rf61gueggv" path="res://Assets/Individual/Rotators/1.png" id="2_mcklf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8x3fq"]
+radius = 106.367
+
+[node name="Rotator2" type="StaticBody2D" groups=["rotator"]]
+script = ExtResource("1_snckd")
+speed = 1
+
+[node name="10" type="Sprite2D" parent="."]
+position = Vector2(0.0800171, -15.476)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_mcklf")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_8x3fq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0.0800171, -15.476)
+scale = Vector2(0.7, 0.7)
+polygon = PackedVector2Array(-3, -258, -284, 22.2, -284, 29.8, -67.8, 246, -65.2, 246, -62, 242.8, -62, 205.2, -242, 26.1, 0.399994, -216.7, 241.7, 25.5, 65.2, 204, 62.9, 204, 65, 243.1, 65, 245.3, 67.5, 246.4, 283.8, 30, 284, 20.2, 5, -257.9)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

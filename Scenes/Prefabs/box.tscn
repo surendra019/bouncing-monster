@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddv837ximbxc"]
+
+[ext_resource type="Texture2D" uid="uid://c1avdmd0cw4cc" path="res://Assets/Individual/box.png" id="1_ygml6"]
+
+[sub_resource type="GDScript" id="GDScript_uudb6"]
+script/source = "extends Sprite2D
+
+var done: bool
+
+var main_ref
+var on_going_tween: Tween
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	main_ref = get_tree().get_first_node_in_group(\"main\")
+
+func tween(final_pos: Vector2) -> void:
+	if not done:
+		on_going_tween = create_tween()
+		on_going_tween.tween_property(self, \"global_position\", final_pos, 8)
+		on_going_tween.play()
+		done = true
+		
+
+func kill_tween() -> void:
+	if on_going_tween:
+		on_going_tween.kill()
+
+func pause_tween(a: bool) -> void:
+	if on_going_tween:
+		if a:
+			on_going_tween.pause()
+		else:
+			on_going_tween.play()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwwyp"]
+size = Vector2(590.428, 590.428)
+
+[node name="Box" type="Sprite2D"]
+z_index = 500
+z_as_relative = false
+scale = Vector2(0.730263, 0.730263)
+texture = ExtResource("1_ygml6")
+script = SubResource("GDScript_uudb6")
+
+[node name="Area2D" type="Area2D" parent="." groups=["rotator"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -5.27168)
+shape = SubResource("RectangleShape2D_wwwyp")
