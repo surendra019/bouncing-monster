@@ -1,10 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmg2oyiktpau1"]
+[gd_scene load_steps=13 format=3 uid="uid://bmg2oyiktpau1"]
 
 [ext_resource type="Script" path="res://Scripts/Screens/main.gd" id="1_aqhxk"]
 [ext_resource type="Script" path="res://Scripts/UI/main_ui.gd" id="2_ydvd3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4yy1"]
-bg_color = Color(0.370364, 0.370365, 0.370364, 1)
+[ext_resource type="Texture2D" uid="uid://c45yyta1dkbme" path="res://Assets/Individual/backgrounds/space.jpg" id="3_1vpqw"]
+[ext_resource type="Texture2D" uid="uid://cm8hq7tbsacbh" path="res://Assets/GUI/SVG/Buttons/button_long_normal.svg" id="3_san2l"]
+[ext_resource type="FontFile" uid="uid://mc8f60ywrmvn" path="res://Assets/fonts/kill_bad_cafe/Kill Bad Cafe.otf" id="4_5s4fu"]
+[ext_resource type="Texture2D" uid="uid://bc3gyqedjc4lc" path="res://Assets/Individual/backgrounds/water.jpg" id="4_jwwss"]
+[ext_resource type="Texture2D" uid="uid://bov5171rs8psf" path="res://Assets/GUI/SVG/Buttons/cirlce_normal.svg" id="5_nue7k"]
+[ext_resource type="Texture2D" uid="uid://clvlmypxhmsmg" path="res://Assets/Icons/ic_pause.png" id="6_61koo"]
+[ext_resource type="PackedScene" uid="uid://buhylxe42xoex" path="res://Scenes/Screens/pause_menu.tscn" id="7_5qjv1"]
+[ext_resource type="PackedScene" uid="uid://dlpksol083nma" path="res://Scenes/Screens/gameover_menu.tscn" id="8_n27js"]
+[ext_resource type="Texture2D" uid="uid://byyq0pdp71ql6" path="res://Assets/Individual/backgrounds/jungle.jpg" id="9_jcpp4"]
+[ext_resource type="Texture2D" uid="uid://d3fy7ky3hsh20" path="res://Assets/GUI/coin_ad.png" id="12_1sjr0"]
 
 [node name="Main" type="Control" groups=["main"]]
 layout_mode = 3
@@ -15,6 +22,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aqhxk")
 rotator_spawn_gap = 438.0
+theme_jungle = ExtResource("9_jcpp4")
+theme_space = ExtResource("3_1vpqw")
+theme_water = ExtResource("4_jwwss")
 
 [node name="RotatorSpawn" type="Marker2D" parent="."]
 position = Vector2(252, 0)
@@ -27,7 +37,7 @@ position = Vector2(151, 730)
 [node name="PlatformContainer" type="Node2D" parent="."]
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(252, 651)
+position = Vector2(252, 661)
 
 [node name="RotatorSpawnTimer" type="Timer" parent="."]
 autostart = true
@@ -52,6 +62,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect" type="TextureRect" parent="BG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -708.0
+offset_top = -135.0
+offset_right = 708.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_1vpqw")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="BG/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.388235)
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 2
 script = ExtResource("2_ydvd3")
@@ -64,113 +96,93 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="UI"]
-offset_right = 89.0
-offset_bottom = 35.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_q4yy1")
+[node name="Label" type="TextureRect" parent="UI"]
+offset_left = -33.0
+offset_right = 123.0
+offset_bottom = 83.0
+texture = ExtResource("3_san2l")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_right = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_5s4fu")
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 1
 
-[node name="PauseButton" type="Button" parent="UI"]
+[node name="PauseButton" type="TextureButton" parent="UI"]
+custom_minimum_size = Vector2(63, 65)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -90.0
-offset_top = 22.0
-offset_right = -24.0
-offset_bottom = 58.0
+offset_left = -71.0
+offset_top = 10.0
+offset_right = -8.0
+offset_bottom = 75.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Pause"
+texture_normal = ExtResource("5_nue7k")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
 
-[node name="PauseMenu" type="Control" parent="UI"]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="UI/PauseMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.47451)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu"]
+[node name="TextureRect" type="TextureRect" parent="UI/PauseButton"]
+custom_minimum_size = Vector2(32, 33)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -81.5
-offset_top = -31.5
-offset_right = 81.5
-offset_bottom = 31.5
+offset_left = -16.0
+offset_top = -16.5
+offset_right = 16.0
+offset_bottom = 16.5
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("6_61koo")
+expand_mode = 1
+stretch_mode = 4
 
-[node name="ResumeButton" type="Button" parent="UI/PauseMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Resume"
+[node name="PauseMenu" parent="UI" instance=ExtResource("7_5qjv1")]
 
-[node name="RestartButton" type="Button" parent="UI/PauseMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Restart"
+[node name="GameoverMenu" parent="UI" instance=ExtResource("8_n27js")]
 
-[node name="GameOverMenu" type="Control" parent="UI"]
-layout_mode = 3
+[node name="LifeForAdButton" type="TextureButton" parent="UI"]
+offset_left = 363.0
+offset_top = 88.0
+offset_right = 500.0
+offset_bottom = 225.0
+texture_normal = ExtResource("12_1sjr0")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="FadeEffectRect" type="ColorRect" parent="UI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[node name="ColorRect" type="ColorRect" parent="UI/GameOverMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.47451)
+[node name="Particles" type="CanvasLayer" parent="."]
+layer = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOverMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -47.5
-offset_top = -25.0
-offset_right = 47.5
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HomeButton" type="Button" parent="UI/GameOverMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Home"
-
-[node name="RetryButton" type="Button" parent="UI/GameOverMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Retry"
+[node name="OtherContainer" type="Node2D" parent="Particles"]
 
 [connection signal="timeout" from="RotatorSpawnTimer" to="." method="_on_rotator_spawn_timer_timeout"]
 [connection signal="pressed" from="UI/PauseButton" to="UI" method="_on_pause_button_pressed"]
-[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/ResumeButton" to="UI" method="_on_resume_button_pressed"]
-[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/RestartButton" to="UI" method="_on_restart_button_pressed"]
-[connection signal="pressed" from="UI/GameOverMenu/VBoxContainer/HomeButton" to="UI" method="_on_home_button_pressed"]
-[connection signal="pressed" from="UI/GameOverMenu/VBoxContainer/RetryButton" to="UI" method="_on_retry_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/HBoxContainer/RestartButton" to="UI" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/ResumeButton" to="UI" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/MainMenuButton" to="UI" method="_on_main_menu_button_pressed"]
+
+[editable path="UI/PauseMenu"]
+[editable path="UI/GameoverMenu"]

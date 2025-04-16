@@ -9,6 +9,10 @@ extends Control
 @onready var box_spawn_left_x: Marker2D = $BoxSpawnLeftX
 @onready var box_container: Node2D = $BoxContainer
 @onready var ui: CanvasLayer = $UI
+@onready var bg_texture_rect: TextureRect = $BG/TextureRect
+@onready var bg_color_rect: ColorRect = $BG/ColorRect
+@onready var other_container: Node2D = $Particles/OtherContainer
+
 
 @export var rotator_spawn_gap: float = 400
 var rotator_current_spawn_y: float
@@ -28,20 +32,112 @@ var game_over: bool
 var paused: bool = false
 var current_level: int
 
+@export var theme_white: Color = Color.WHITE
+@export var theme_jungle: CompressedTexture2D
+@export var theme_space: CompressedTexture2D
+@export var theme_water: CompressedTexture2D
+
 
 const PLATFORM = preload("res://Scenes/Prefabs/platform.tscn")
 const PLAYER = preload("res://Scenes/player.tscn")
 const BOX = preload("res://Scenes/Prefabs/box.tscn")
 const DEAD_PARTICLES = preload("res://Scenes/Prefabs/dead_particles.tscn")
+const PLATFORM_PARTICLE = preload("res://Scenes/Prefabs/platform_particle.tscn")
+const FALLABLE_LEAF = preload("res://Scenes/Prefabs/fallable_leaf.tscn")
+const FALLABLE_STAR = preload("res://Scenes/Prefabs/fallable_star.tscn")
+const RISEABLE_BUBBLE = preload("res://Scenes/Prefabs/riseable_bubble.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_set_theme()
 	randomize()
 	rotator_current_spawn_y = rotator_spawn_point_y.global_position.y
 	spawn_player()
 	ui.set_score_label(score)
 	spawn_initial_rotators()
 
+func _set_theme() -> void:
+	if Manager.current_theme == Manager.THEME.WHITE:
+		bg_texture_rect.hide()
+		bg_color_rect.show()
+	else:
+		bg_texture_rect.show()
+		bg_color_rect.hide()
+	match Manager.current_theme:
+		Manager.THEME.JUNGLE:
+			bg_texture_rect.texture = theme_jungle
+			add_leaf_spawn_timer()
+		Manager.THEME.SPACE:
+			bg_texture_rect.texture = theme_space
+			add_star_spawn_timer()
+		Manager.THEME.WATER:
+			bg_texture_rect.texture = theme_water
+			add_bubble_spawn_timer()
+
+
+func add_bubble_spawn_timer() -> void:
+	var t = Timer.new()
+	add_child(t)
+	t.wait_time = randf_range(4, 6)
+	t.one_shot = true
+	t.autostart = true
+	t.start()
+	t.timeout.connect(func():
+		var l = RISEABLE_BUBBLE.instantiate()
+		l.global_position.x = randf_range(0, get_viewport_rect().size.x)
+		l.scale = Vector2(randf_range(.03, .07), randf_range(.03, .07))
+		add_child(l)
+		
+		l.global_position.y = player.global_position.y + 300
+		t.wait_time = randf_range(4, 6)
+		t.start()
+		l.z_as_relative = false
+		l.z_index = 600
+		
+		)
+func add_star_spawn_timer() -> void:
+	var t = Timer.new()
+	add_child(t)
+	t.wait_time = randf_range(4, 10)
+	t.one_shot = true
+	t.autostart = true
+	t.start()
+	t.timeout.connect(func():
+		var l = FALLABLE_STAR.instantiate()
+		l.global_position.x = randf_range(0, get_viewport_rect().size.x)
+		l.scale = Vector2(randf_range(.04, .07), randf_range(.04, .07))
+		add_child(l)
+		
+		l.global_position.y = player.global_position.y - 700
+		t.wait_time = randf_range(4, 10)
+		t.start()
+		l.z_as_relative = false
+		l.z_index = 600
+		
+		)
+# adds the leaf spawn timer.
+func add_leaf_spawn_timer() -> void:
+	var t = Timer.new()
+	add_child(t)
+	t.wait_time = randf_range(4, 10)
+	t.one_shot = true
+	t.autostart = true
+	t.start()
+	t.timeout.connect(func():
+		var l = FALLABLE_LEAF.instantiate()
+		l.global_position.x = randf_range(0, get_viewport_rect().size.x)
+		l.scale = Vector2(randf_range(.025, .01), randf_range(.025, .01))
+		add_child(l)
+		
+		print(l.global_position.x)
+		l.global_position.y = player.global_position.y - 700
+		t.wait_time = randf_range(4, 10)
+		t.start()
+		l.z_as_relative = false
+		l.z_index = 600
+		
+		)
+	
 
 
 # spawns the initial three rotators.
@@ -65,7 +161,7 @@ func spawn_random_rotator(is_first: bool) -> bool:
 			spawn_double_rotator(true)
 			is_first = false
 		else:
-			spawn_double_rotator(can_start)
+			spawn_double_rotator(false)
 	return is_first
 	
 # spawns a rotator with its idx spawn.
@@ -86,19 +182,21 @@ func spawn_rotator(rotator_idx: int, can_start: bool = false) -> void:
 	spawn_platform(rotator)
 	rotator_current_spawn_y -= rotator_spawn_gap
 	if current_level % 3 == 0 && current_speed < MAX_ROTATE_SPEED:
-		current_speed += 1
+		current_speed += .3
 	current_level += 1;
-	rotator.speed = clamp(randf_range(1, current_speed), 1, INF)
+	rotator.speed = clamp(current_speed, 1, INF)
 	
 
 # spawns the central platform.
 func spawn_platform(rotator_ref: Node) -> void:	
 	var platform = PLATFORM.instantiate()
-	platform_container.add_child(platform)
 	platform.global_position.x = rotator_spawn_point_x.global_position.x
 	platform.global_position.y = rotator_current_spawn_y
+	platform_container.add_child(platform)
+	
 	if platforms.size() > 4:
-		platforms[0].queue_free()
+		if is_instance_valid(platforms[0]) && platforms[0].is_inside_tree():
+			platforms[0].queue_free()
 		platforms.remove_at(0)
 	platforms.push_back(platform)
 	
@@ -146,8 +244,9 @@ func get_nearest_rotator() -> Node:
 	
 # increments the score by the passed value.
 func increase_score(value: int) -> void:
-	score += value
-	ui.set_score_label(score)
+	if not game_over:
+		score += value
+		ui.set_score_label(score)
 
 
 # spawns the double rotator.
@@ -184,17 +283,20 @@ func spawn_double_rotator(can_start: bool = false) -> void:
 		small_rotators[0].queue_free()
 		small_rotators.remove_at(0)
 	small_rotators.push_back(small_rotator)
-	
+	rotator.small_rotator = small_rotator
 	spawn_boxes(rotator)
 	spawn_platform(rotator)
 	rotator_current_spawn_y -= rotator_spawn_gap
 	if current_level % 3 == 0 && current_speed < MAX_ROTATE_SPEED:
-		current_speed += 1
+		current_speed += .3
 	current_level += 1;
-	var speed = randf_range(1, current_speed)
+	var speed = current_speed
 	rotator.speed = clamp(speed, 1, INF)
 	small_rotator.speed = clamp(speed, 1, INF)
 
+func start_next_rotator_hide_timer() -> void:
+	get_next_rotator().start_hide_timer()
+	
 # returns the next rotator with respect to the player.
 func get_next_rotator() -> Node2D:
 	var idx: int = 0
@@ -223,6 +325,16 @@ func set_game_over(pos: Vector2) -> void:
 	#for i in box_container.get_children():
 		#i.kill_tween()
 
+# spawns the platform destroy particles.
+func spawn_platform_destroy_particle(pos: Vector2) -> void:
+	var p = PLATFORM_PARTICLE.instantiate()
+	add_child(p)
+	p.global_position = pos
+	p.emitting = true
+	await p.finished.connect(func():
+		p.queue_free()
+		)
+	
 # sets the box to pause or resume mode.
 func set_box_pause(a: bool) -> void:
 	for i in box_container.get_children():

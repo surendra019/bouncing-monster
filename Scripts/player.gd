@@ -11,28 +11,35 @@ var main_ref
 
 var time_scale_tween: Tween
 var current_rotator: Node2D
+var is_in_menu: bool
 
 func _ready() -> void:
-	main_ref = get_tree().get_first_node_in_group("main")
-	camera.global_position = global_position
-	get_tree().get_first_node_in_group("input").gui_input.connect(func(event):
-		if event is InputEventScreenTouch:
-			if event.pressed:
-				if is_on_floor():
-					velocity.y = JUMP_VELOCITY
-				check_next_an_play_time_scale()
-		)
+	if not is_in_menu:
+		main_ref = get_tree().get_first_node_in_group("main")
+		camera.global_position = global_position
+		get_tree().get_first_node_in_group("input").gui_input.connect(func(event):
+			if event is InputEventScreenTouch:
+				if event.pressed:
+					if is_on_floor():
+						velocity.y = JUMP_VELOCITY
+					check_next_an_play_time_scale()
+			)
+			
+	else:
+		camera.enabled = false
+		
 		
 func _physics_process(delta: float) -> void:
-	if not main_ref.paused:
-		if not main_ref.game_over:
-			camera.global_position.y = lerp(camera.global_position.y, global_position.y, delta * 5)
-			camera.global_position.x = lerp(camera.global_position.x, global_position.x, delta * 5)
-		# Add the gravity.
-		if not is_on_floor():
-			velocity += get_gravity() * delta
+	if not is_in_menu:
+		if not main_ref.paused:
+			if not main_ref.game_over:
+				camera.global_position.y = lerp(camera.global_position.y, global_position.y, delta * 5)
+				camera.global_position.x = lerp(camera.global_position.x, global_position.x, delta * 5)
+			# Add the gravity.
+			if not is_on_floor():
+				velocity += get_gravity() * delta
 
-		move_and_slide()
+			move_and_slide()
 	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

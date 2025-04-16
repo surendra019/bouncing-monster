@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5lhqenges4o"]
+[gd_scene load_steps=4 format=3 uid="uid://b5lhqenges4o"]
 
 [ext_resource type="Script" path="res://Scripts/platform.gd" id="1_nuh2b"]
+[ext_resource type="Texture2D" uid="uid://dd5vw7vtjw110" path="res://Assets/crack.png" id="2_882aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qh7c2"]
 size = Vector2(93, 15)
@@ -8,14 +9,35 @@ size = Vector2(93, 15)
 [node name="Platform" type="StaticBody2D" groups=["platform"]]
 script = ExtResource("1_nuh2b")
 active_color = Color(0.8, 0.4, 0.2, 1)
+theme_jungle = Color(0.0788092, 0.801601, 1.15514e-06, 1)
+theme_white = Color(0.8, 0.4, 0.2, 1)
+theme_space = Color(1, 1, 1, 1)
+theme_water = Color(0.2, 0.811765, 1, 1)
 
 [node name="Panel" type="ColorRect" parent="."]
+clip_children = 2
 offset_left = -46.5
 offset_top = -7.5
 offset_right = 46.5
 offset_bottom = 7.5
 color = Color(0.172549, 0.160784, 0.239216, 1)
 
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_882aa")
+expand_mode = 1
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qh7c2")
 one_way_collision = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

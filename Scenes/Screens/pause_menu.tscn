@@ -1,0 +1,239 @@
+[gd_scene load_steps=10 format=3 uid="uid://buhylxe42xoex"]
+
+[ext_resource type="Script" path="res://Scripts/Screens/pause_menu.gd" id="1_f3ws0"]
+[ext_resource type="Texture2D" uid="uid://s8j10wqhja54" path="res://Assets/GUI/SVG/Buttons/button_medium_normal.svg" id="1_gue8d"]
+[ext_resource type="Texture2D" uid="uid://djnfv86v7pn24" path="res://Assets/Icons/ic_share.png" id="2_hghd8"]
+[ext_resource type="FontFile" uid="uid://mc8f60ywrmvn" path="res://Assets/fonts/kill_bad_cafe/Kill Bad Cafe.otf" id="2_m8vqi"]
+[ext_resource type="Texture2D" uid="uid://bov5171rs8psf" path="res://Assets/GUI/SVG/Buttons/cirlce_normal.svg" id="3_bwb71"]
+[ext_resource type="Texture2D" uid="uid://cp7furug624n" path="res://Assets/Icons/ic_restart.png" id="3_poa1l"]
+[ext_resource type="Texture2D" uid="uid://db527g15ihfjy" path="res://Assets/Icons/ic_play.png" id="4_1561j"]
+[ext_resource type="Texture2D" uid="uid://hsncmklpl0us" path="res://Assets/Icons/Others/coin_bouncing_monster.png" id="5_trejn"]
+[ext_resource type="Texture2D" uid="uid://daj0m8quix428" path="res://Assets/Icons/ic_ad.png" id="6_cto4q"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f3ws0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.67451)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -227.0
+offset_top = 15.0
+offset_right = 227.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_constants/separation = 120
+metadata/_edit_group_ = true
+
+[node name="ShareButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(63, 65)
+layout_mode = 2
+size_flags_horizontal = 2
+texture_normal = ExtResource("3_bwb71")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ShareButton"]
+custom_minimum_size = Vector2(32, 33)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.5
+offset_top = -16.5
+offset_right = 16.5
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_hghd8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RestartButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(63, 65)
+layout_mode = 2
+size_flags_horizontal = 10
+texture_normal = ExtResource("3_bwb71")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/RestartButton"]
+custom_minimum_size = Vector2(32, 33)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.5
+offset_right = 16.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_poa1l")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -228.0
+offset_right = 88.0
+offset_bottom = -165.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_m8vqi")
+theme_override_font_sizes/font_size = 70
+text = "Resume"
+
+[node name="ResumeButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -147.0
+offset_right = 75.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_bwb71")
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="ResumeButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -33.0
+offset_right = 42.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_1561j")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -106.0
+offset_top = -392.0
+offset_right = 104.0
+offset_bottom = -142.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="WatchVideoButton" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(210, 123)
+layout_mode = 2
+texture_normal = ExtResource("1_gue8d")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/WatchVideoButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 76.0
+offset_top = 59.0
+offset_right = -104.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_m8vqi")
+theme_override_font_sizes/font_size = 35
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/WatchVideoButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -37.5
+offset_right = 88.0
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_trejn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/WatchVideoButton"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 31.0
+offset_right = 88.0
+offset_bottom = 83.0
+rotation = -0.385214
+texture = ExtResource("6_cto4q")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MainMenuButton" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(210, 123)
+layout_mode = 2
+texture_normal = ExtResource("1_gue8d")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="VBoxContainer/MainMenuButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_right = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_m8vqi")
+theme_override_font_sizes/font_size = 35
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="HBoxContainer/ShareButton" to="." method="_on_share_button_pressed"]

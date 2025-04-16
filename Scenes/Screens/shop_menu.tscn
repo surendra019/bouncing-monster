@@ -1,0 +1,133 @@
+[gd_scene load_steps=6 format=3 uid="uid://blnnhomirxbpo"]
+
+[ext_resource type="Script" path="res://Scripts/Screens/shop_menu.gd" id="1_ioc8l"]
+[ext_resource type="Texture2D" uid="uid://byyq0pdp71ql6" path="res://Assets/Individual/backgrounds/jungle.jpg" id="2_8xhsx"]
+[ext_resource type="Texture2D" uid="uid://bov5171rs8psf" path="res://Assets/GUI/SVG/Buttons/cirlce_normal.svg" id="3_k4x1t"]
+[ext_resource type="Texture2D" uid="uid://blthf7cofqfyy" path="res://Assets/Icons/ic_back.png" id="4_2j4ol"]
+[ext_resource type="FontFile" uid="uid://mc8f60ywrmvn" path="res://Assets/fonts/kill_bad_cafe/Kill Bad Cafe.otf" id="4_wnq4k"]
+
+[node name="ShopMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ioc8l")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -708.0
+offset_top = -135.0
+offset_right = 708.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8xhsx")
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.233925, 0.233925, 0.233925, 0.647059)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -167.0
+offset_top = 11.0
+offset_right = -29.0
+offset_bottom = 86.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_wnq4k")
+theme_override_font_sizes/font_size = 60
+text = "Shop"
+
+[node name="BackButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(63, 65)
+layout_mode = 0
+offset_left = 28.0
+offset_top = 23.0
+offset_right = 91.0
+offset_bottom = 88.0
+texture_normal = ExtResource("3_k4x1t")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="BackButton"]
+custom_minimum_size = Vector2(32, 33)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.5
+offset_right = 16.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_2j4ol")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 129.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_wnq4k")
+theme_override_font_sizes/font_size = 25
+current_tab = 0
+
+[node name="Characters" type="ScrollContainer" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Characters"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/v_separation = 70
+columns = 3
+
+[node name="Power ups" type="ScrollContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Power ups"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/v_separation = 70
+columns = 3
+
+[node name="Coins" type="ScrollContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

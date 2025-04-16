@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8y3ne44flngo"]
+
+[ext_resource type="Script" path="res://Scripts/UI/coin_container.gd" id="1_o6q86"]
+[ext_resource type="Texture2D" uid="uid://hsncmklpl0us" path="res://Assets/Icons/Others/coin_bouncing_monster.png" id="2_xg0xr"]
+[ext_resource type="FontFile" uid="uid://mc8f60ywrmvn" path="res://Assets/fonts/kill_bad_cafe/Kill Bad Cafe.otf" id="3_je80s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_in5d7"]
+bg_color = Color(1, 0.352941, 0.231373, 1)
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+
+[node name="CoinContainer" type="Panel"]
+offset_right = 122.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_in5d7")
+script = ExtResource("1_o6q86")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -7.0
+offset_right = 29.0
+offset_bottom = 48.0
+texture = ExtResource("2_xg0xr")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.0
+offset_right = -9.0
+offset_bottom = 39.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_je80s")
+theme_override_font_sizes/font_size = 25
+text = "3242"
+horizontal_alignment = 2
+vertical_alignment = 1

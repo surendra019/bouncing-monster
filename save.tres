@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Save" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/save_script.gd" id="1_6dgp6"]
+
+[resource]
+script = ExtResource("1_6dgp6")
+current_theme = 2

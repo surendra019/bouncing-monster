@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddv837ximbxc"]
+[gd_scene load_steps=7 format=3 uid="uid://ddv837ximbxc"]
 
 [ext_resource type="Texture2D" uid="uid://c1avdmd0cw4cc" path="res://Assets/Individual/box.png" id="1_ygml6"]
+[ext_resource type="Texture2D" uid="uid://d11oi4q36xtrj" path="res://Assets/Individual/box_jungle.png" id="2_vgirw"]
+[ext_resource type="Texture2D" uid="uid://b3rm7o1jr725o" path="res://Assets/Individual/box_space.svg" id="3_7s1i5"]
+[ext_resource type="Texture2D" uid="uid://bqvhiurxnoa5l" path="res://Assets/Individual/box_water.svg" id="4_unn7a"]
 
 [sub_resource type="GDScript" id="GDScript_uudb6"]
 script/source = "extends Sprite2D
@@ -10,8 +13,22 @@ var done: bool
 var main_ref
 var on_going_tween: Tween
 
+@export var theme_jungle: CompressedTexture2D
+@export var theme_white: CompressedTexture2D
+@export var theme_space: CompressedTexture2D
+@export var theme_water: CompressedTexture2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	match Manager.current_theme:
+		Manager.THEME.JUNGLE:
+			texture = theme_jungle
+		Manager.THEME.WHITE:
+			texture = theme_white
+		Manager.THEME.SPACE:
+			texture = theme_space
+		Manager.THEME.WATER:
+			texture = theme_water
 	main_ref = get_tree().get_first_node_in_group(\"main\")
 
 func tween(final_pos: Vector2) -> void:
@@ -43,6 +60,10 @@ z_as_relative = false
 scale = Vector2(0.730263, 0.730263)
 texture = ExtResource("1_ygml6")
 script = SubResource("GDScript_uudb6")
+theme_jungle = ExtResource("2_vgirw")
+theme_white = ExtResource("1_ygml6")
+theme_space = ExtResource("3_7s1i5")
+theme_water = ExtResource("4_unn7a")
 
 [node name="Area2D" type="Area2D" parent="." groups=["rotator"]]
 

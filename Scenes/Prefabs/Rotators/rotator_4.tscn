@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bosbvpmb0a8x2"]
+[gd_scene load_steps=7 format=3 uid="uid://bosbvpmb0a8x2"]
 
 [ext_resource type="Script" path="res://Scripts/rotator.gd" id="1_xsreu"]
 [ext_resource type="Texture2D" uid="uid://dot8247tpae06" path="res://Assets/Individual/Rotators/3.png" id="2_u8sih"]
+[ext_resource type="Texture2D" uid="uid://7rononbue2wi" path="res://Assets/Individual/Rotators/Jungle/3.png" id="2_ynr5j"]
+[ext_resource type="Texture2D" uid="uid://bsgjsef23lxw" path="res://Assets/Individual/Rotators/Space/3.png" id="4_dx8y4"]
+[ext_resource type="Texture2D" uid="uid://dc87qbf7s1cud" path="res://Assets/Individual/Rotators/Water/3.png" id="5_g5vdx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8x3fq"]
 radius = 106.367
@@ -9,6 +12,10 @@ radius = 106.367
 [node name="Rotator4" type="StaticBody2D" groups=["rotator"]]
 script = ExtResource("1_xsreu")
 speed = 1
+theme_jungle = ExtResource("2_ynr5j")
+theme_white = ExtResource("2_u8sih")
+theme_space = ExtResource("4_dx8y4")
+theme_water = ExtResource("5_g5vdx")
 
 [node name="10" type="Sprite2D" parent="." groups=["rotator"]]
 position = Vector2(1, 0.999998)

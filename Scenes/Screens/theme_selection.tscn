@@ -1,0 +1,303 @@
+[gd_scene load_steps=15 format=3 uid="uid://bk06g76a1cosm"]
+
+[ext_resource type="Script" path="res://Scripts/Screens/theme_selection.gd" id="1_enlrf"]
+[ext_resource type="FontFile" uid="uid://mc8f60ywrmvn" path="res://Assets/fonts/kill_bad_cafe/Kill Bad Cafe.otf" id="2_174s6"]
+[ext_resource type="Texture2D" uid="uid://dwsioiwql3tr3" path="res://Assets/themes/jungle.png" id="3_l7st6"]
+[ext_resource type="Texture2D" uid="uid://c6dr1g1q620ml" path="res://Assets/themes/space.png" id="3_m1wma"]
+[ext_resource type="Texture2D" uid="uid://bov5171rs8psf" path="res://Assets/GUI/SVG/Buttons/cirlce_normal.svg" id="4_d5xrn"]
+[ext_resource type="Texture2D" uid="uid://577vucsv4l7h" path="res://Assets/themes/water.png" id="4_g2pgo"]
+[ext_resource type="Texture2D" uid="uid://cfgxboctrkh4q" path="res://Assets/themes/white.png" id="4_noqde"]
+[ext_resource type="Texture2D" uid="uid://bugdajlndiabw" path="res://Assets/Icons/ic_arrow.png" id="5_rd6g2"]
+[ext_resource type="Texture2D" uid="uid://s8j10wqhja54" path="res://Assets/GUI/SVG/Buttons/button_medium_normal.svg" id="6_ur83s"]
+[ext_resource type="Texture2D" uid="uid://blthf7cofqfyy" path="res://Assets/Icons/ic_back.png" id="8_symql"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gi6u"]
+bg_color = Color(0, 0, 0, 0.588235)
+expand_margin_left = 1955.0
+expand_margin_right = 670.0
+
+[sub_resource type="Animation" id="Animation_ai0h1"]
+resource_name = "ui_init"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NextButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(650, 416), Vector2(390, 416), Vector2(413, 416)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PreviousButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-230, 416), Vector2(60, 416), Vector2(23, 416)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SelectButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(154, 1000), Vector2(154, 700), Vector2(154, 759)]
+}
+
+[sub_resource type="Animation" id="Animation_e6aye"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NextButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(650, 416)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PreviousButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-230, 416)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SelectButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(154, 1000)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1iivf"]
+_data = {
+"RESET": SubResource("Animation_e6aye"),
+"ui_init": SubResource("Animation_ai0h1")
+}
+
+[node name="ThemeSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_enlrf")
+theme_jungle_bg = ExtResource("3_l7st6")
+theme_space_bg = ExtResource("3_m1wma")
+theme_white_bg = ExtResource("4_noqde")
+theme_water_bg = ExtResource("4_g2pgo")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(251, 464)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_l7st6")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -167.0
+offset_top = 11.0
+offset_right = -29.0
+offset_bottom = 86.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_174s6")
+theme_override_font_sizes/font_size = 60
+text = "Theme"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.0
+offset_top = 125.0
+offset_right = 129.0
+offset_bottom = 176.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_174s6")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_0gi6u")
+text = "Theme name"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NextButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(63, 65)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -32.0
+offset_right = -28.0
+offset_bottom = 33.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("4_d5xrn")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="NextButton"]
+custom_minimum_size = Vector2(32, 33)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.5
+offset_right = 16.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_rd6g2")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="PreviousButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(63, 65)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 23.0
+offset_top = -32.0
+offset_right = 86.0
+offset_bottom = 33.0
+grow_vertical = 2
+texture_normal = ExtResource("4_d5xrn")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="PreviousButton"]
+custom_minimum_size = Vector2(32, 33)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.5
+offset_right = 16.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_rd6g2")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="SelectButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(156, 91)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = -137.0
+offset_right = 96.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+toggle_mode = true
+texture_normal = ExtResource("6_ur83s")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="SelectButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_174s6")
+theme_override_font_sizes/font_size = 30
+text = "Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(63, 65)
+layout_mode = 0
+offset_left = 28.0
+offset_top = 23.0
+offset_right = 91.0
+offset_bottom = 88.0
+texture_normal = ExtResource("4_d5xrn")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="BackButton"]
+custom_minimum_size = Vector2(32, 33)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.5
+offset_right = 16.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_symql")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1iivf")
+}
+
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="SelectButton" to="." method="_on_select_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

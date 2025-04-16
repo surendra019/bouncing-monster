@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhovsm5pwu1cb"]
+
+[sub_resource type="Gradient" id="Gradient_p3xep"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GDScript" id="GDScript_k5b3x"]
+script/source = "extends CPUParticles2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	match Manager.current_theme:
+		Manager.THEME.JUNGLE:
+			color = Color.GREEN
+		Manager.THEME.WHITE:
+			color = Color.DARK_ORANGE
+"
+
+[node name="PlatformParticle" type="CPUParticles2D"]
+emitting = false
+amount = 15
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+emission_shape = 4
+emission_points = PackedVector2Array(-30, 0, 0, 0, 30, 0, -10, 0, 10, 0, -20, 0, 20, 0)
+emission_colors = PackedColorArray()
+direction = Vector2(0, 1)
+spread = 180.0
+gravity = Vector2(0, 100)
+initial_velocity_max = 1000.0
+scale_amount_min = 3.0
+scale_amount_max = 8.0
+color = Color(0, 0, 0, 1)
+color_ramp = SubResource("Gradient_p3xep")
+script = SubResource("GDScript_k5b3x")

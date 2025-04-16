@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpqg4o0xg4kr"]
+
+[ext_resource type="Texture2D" uid="uid://8dcnhqbdio3k" path="res://Assets/Individual/leaf.png" id="1_ha8py"]
+
+[sub_resource type="GDScript" id="GDScript_ul21c"]
+script/source = "extends Sprite2D
+
+# Parameters to randomize
+var fall_speed = 50.0
+var wave_amplitude = 30.0
+var wave_frequency = 2.0
+var rotation_speed = 90.0 # degrees per second
+
+# Internals
+var time_passed := 0.0
+var initial_x := 0.0
+
+func _ready():
+	initial_x = position.x
+	randomize()
+	# Add random variation
+	fall_speed += randf_range(-20, 20)
+	wave_amplitude += randf_range(-10, 10)
+	wave_frequency += randf_range(-0.5, 0.5)
+	rotation_speed *= randf_range(0.8, 1.2) * (1 if randi() % 2 == 0 else -1)
+
+func _process(delta):
+	time_passed += delta
+	position.y += fall_speed * delta
+	position.x = initial_x + sin(time_passed * wave_frequency) * wave_amplitude
+	rotation_degrees += rotation_speed * delta
+
+	# Despawn if off-screen (adjust based on your screen height)
+	if position.y > get_viewport_rect().size.y + 100:
+		queue_free()
+
+func start_motion():
+	_ready() # optionally force re-randomizing motion
+"
+
+[node name="FallableLeaf" type="Sprite2D"]
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_ha8py")
+script = SubResource("GDScript_ul21c")

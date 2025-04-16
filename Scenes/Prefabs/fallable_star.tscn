@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://12ncxvl2m0a0"]
+
+[ext_resource type="Texture2D" uid="uid://vcm7qxelq6yb" path="res://Assets/Icons/ic_star.png" id="1_tf4s7"]
+
+[sub_resource type="GDScript" id="GDScript_edgal"]
+script/source = "extends Sprite2D
+
+# Parameters to randomize
+var fall_speed = 400.0  # stars fall faster than leaves
+
+# Internals
+var initial_position := Vector2.ZERO
+
+func _ready():
+	initial_position = position
+	randomize()
+	# Add random variation to speed (optional)
+	fall_speed += randf_range(-100, 100)
+
+func _process(delta):
+	position.y += fall_speed * delta
+
+	# Despawn if off-screen (adjust based on your screen height)
+	if position.y > get_viewport_rect().size.y + 100:
+		queue_free()
+
+func start_motion():
+	_ready() # optional re-randomization
+"
+
+[node name="FallableStar" type="Sprite2D"]
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_tf4s7")
+script = SubResource("GDScript_edgal")

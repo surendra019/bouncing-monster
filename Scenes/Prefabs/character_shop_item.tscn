@@ -1,0 +1,154 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8tvflbjqja8q"]
+
+[ext_resource type="Texture2D" uid="uid://cxpli5eih3ij" path="res://Assets/GUI/shop_item_bg.png" id="1_4bu7v"]
+[ext_resource type="Script" path="res://Scripts/character_shop_item.gd" id="2_1oh8g"]
+[ext_resource type="Texture2D" uid="uid://hsncmklpl0us" path="res://Assets/Icons/Others/coin_bouncing_monster.png" id="3_bwsrp"]
+[ext_resource type="Texture2D" uid="uid://bug3nvtad6s4f" path="res://Assets/Icons/ic_lock.png" id="3_jonsh"]
+[ext_resource type="Texture2D" uid="uid://crbaeu7gdvvcd" path="res://Assets/Icons/ic_check.png" id="4_suqmd"]
+[ext_resource type="FontFile" uid="uid://mc8f60ywrmvn" path="res://Assets/fonts/kill_bad_cafe/Kill Bad Cafe.otf" id="4_texkk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohgcg"]
+bg_color = Color(1, 0.351594, 0.229417, 1)
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mydxl"]
+bg_color = Color(1, 1, 1, 0.270588)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j55ly"]
+bg_color = Color(0, 0, 0, 0.658824)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="CharacterShopItem" type="Control"]
+custom_minimum_size = Vector2(145, 142)
+layout_mode = 3
+anchors_preset = 0
+offset_top = -29.0
+offset_right = 145.0
+offset_bottom = 142.0
+size_flags_horizontal = 6
+script = ExtResource("2_1oh8g")
+
+[node name="CharacterShopItem" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(144, 115)
+layout_mode = 0
+offset_top = 24.0
+offset_right = 144.0
+offset_bottom = 139.0
+size_flags_horizontal = 6
+texture_normal = ExtResource("1_4bu7v")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="CoinPanel" type="Panel" parent="CharacterShopItem"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ohgcg")
+
+[node name="TextureRect" type="TextureRect" parent="CharacterShopItem/CoinPanel"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 11.0
+offset_right = 46.0
+offset_bottom = 40.0
+texture = ExtResource("3_bwsrp")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CharacterShopItem/CoinPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -11.5
+offset_right = 34.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_texkk")
+theme_override_font_sizes/font_size = 25
+text = "1592"
+
+[node name="Panel" type="Panel" parent="CharacterShopItem"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mydxl")
+
+[node name="Marker2D" type="Marker2D" parent="CharacterShopItem"]
+position = Vector2(70, 43)
+metadata/_edit_group_ = true
+
+[node name="LockedLayer" type="Panel" parent="CharacterShopItem"]
+z_index = 502
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -18.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_j55ly")
+
+[node name="TextureRect" type="TextureRect" parent="CharacterShopItem/LockedLayer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_jonsh")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Tick" type="TextureRect" parent="CharacterShopItem"]
+z_index = 503
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -37.0
+offset_right = 9.0
+offset_bottom = 3.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("4_suqmd")
+expand_mode = 1
+stretch_mode = 4
